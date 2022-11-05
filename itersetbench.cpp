@@ -1,4 +1,5 @@
 #include <iterator>
+#include <random>
 #include <vector>
 #include <set>
 #include <unordered_set>
@@ -38,7 +39,8 @@ public:
 template <RandomAccessIterator I>
 void random_iota(I first, I last) {
   std::iota(first, last, 0);
-  std::random_shuffle(first, last);
+  std::mt19937 g(1);
+  std::shuffle(first, last, g);
 }
 
 template <typename T>

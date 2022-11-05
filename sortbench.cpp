@@ -1,4 +1,5 @@
 #include <chrono>
+#include <random>
 #include <iterator>
 #include <iostream>
 #include <iomanip>
@@ -38,7 +39,8 @@ public:
 template <RandomAccessIterator I>
 void random_iota(I first, I last) {
   std::iota(first, last, 0);
-  std::random_shuffle(first, last);
+   std::mt19937 g(1);
+  std::shuffle(first, last, g);
 }
 
 template <typename T>

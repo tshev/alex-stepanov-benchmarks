@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <random>
 #include <cstddef>
 #include <algorithm>
 #include <iostream>
@@ -69,7 +70,8 @@ using std::iota;
 template <RandomAccessIterator I>
 void random_iota(I first, I last) {
   iota(first, last, 0);
-  std::random_shuffle(first, last);
+  std::mt19937 g(1);
+  std::shuffle(first, last, g);
 }
 
 template <typename N>
@@ -201,7 +203,8 @@ struct test_instructions
     std::vector<T> data(n);
     random_iota(data.begin(), data.end());
     Seq<T> v1(data.begin(), data.end());
-    std::random_shuffle(data.begin(), data.end());
+    std::mt19937 g(1);
+    std::shuffle(data.begin(), data.end(), g);
     Seq<T> v2(data.begin(), data.end());
     Seq<T> v3(n);
     std::cout << std::setw(15) << type_description(v1) << "\t";
